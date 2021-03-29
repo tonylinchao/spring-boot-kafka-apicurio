@@ -1,0 +1,21 @@
+curl --location --request POST 'http://apicurio-registry-memory-ruby-fuse-uat.app3.osp.pccw.com/api/artifacts' \
+--header 'Content-Type: application/json; artifactType=AVRO' \
+--header 'X-Registry-ArtifactId: events-value' \
+--data-raw '{
+  "name": "Event",
+  "namespace": "com.hkt.btu.ruby.kafka.schema.avro",
+  "type": "record",
+  "doc": "Avro Schema for Event",
+  "fields" : [ {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "description",
+    "type" : "string"
+  }, {
+    "name" : "createdOn",
+    "type" : "int",
+    "logicalType": "timestamp-millis"
+  }
+  ]
+}'

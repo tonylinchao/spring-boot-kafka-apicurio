@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  kafka:
+    properties:
+      #Server host name verification is disabled by setting ssl.endpoint.identification.algorithm to an empty string
+      ssl.endpoint.identification.algorithm:
+      security.protocol: SSL
+    ssl:
+      protocol: SSL
+      trust-store-location: classpath:msghub-ft-a.truststore.jks
+      trust-store-password: password
+
+    consumer:
+      bootstrap-servers: msghub-ft-a.hkt.com:443
+      group-id: group_id
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.apicurio.registry.utils.serde.AvroKafkaDeserializer
+      properties:
+        spring.json.trusted.packages: "com.hkt.btu.ruby.kafka"
+        apicurio:
+          registry:
+            use-specific-avro-reader: true
+            url: http://apicurio-registry-memory-ruby-fuse-uat.app3.osp.pccw.com/api
+
+    producer:
+      bootstrap-servers: msghub-ft-a.hkt.com:443
+      acks: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.apicurio.registry.utils.serde.AvroKafkaSerializer
+      properties:
+        apicurio:
+          registry:
+            url: http://apicurio-registry-memory-ruby-fuse-uat.app3.osp.pccw.com/api
+            artifact-id: io.apicurio.registry.utils.serde.strategy.TopicIdStrategy

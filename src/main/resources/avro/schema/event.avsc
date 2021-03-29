@@ -1,0 +1,11 @@
+{
+	"name": "Event",
+	"namespace": "com.hkt.btu.ruby.kafka.schema.avro",
+	"type": "record",
+	"doc": "Avro Schema for Event",
+	"fields": [
+		{ "name": "name", "type": "string" },
+		{ "name": "description", "type": "string" },
+		{ "name": "createdOn", "type": "int", "logicalType": "timestamp-millis" }
+	]
+}
